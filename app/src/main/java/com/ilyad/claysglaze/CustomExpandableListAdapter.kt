@@ -1,10 +1,12 @@
 package com.ilyad.claysglaze
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.BaseExpandableListAdapter
 import android.widget.ImageButton
 import android.widget.TextView
@@ -39,6 +41,10 @@ class CustomExpandableListAdapter internal constructor(private val context: Cont
         }
         val expandedListTextView = convertView!!.findViewById<TextView>(R.id.list_item_title)
         expandedListTextView.text = expandedListText
+
+
+        
+        
         return convertView
     }
 
