@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClaysGlaze">
-        <activity android:name=".ClayTemperatureActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".CrackleListViewActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ClayTemperatureActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
