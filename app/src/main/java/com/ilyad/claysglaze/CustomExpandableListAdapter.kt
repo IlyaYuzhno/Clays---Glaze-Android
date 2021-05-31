@@ -3,13 +3,13 @@ package com.ilyad.claysglaze
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.BaseExpandableListAdapter
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.res.ResourcesCompat
 
 class CustomExpandableListAdapter internal constructor(private val context: Context,
@@ -36,15 +36,23 @@ class CustomExpandableListAdapter internal constructor(private val context: Cont
         val expandedListText = getChild(listPosition, expandedListPosition) as String
 
         if (convertView == null) {
-            val layoutInflater = this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val layoutInflater =
+                this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = layoutInflater.inflate(R.layout.list_item, null)
+
+            val expandedListTextView = convertView!!.findViewById<TextView>(R.id.list_item_title)
+            expandedListTextView.text = expandedListText
+
+            // Go to ClayTemperatureActivity
+            expandedListTextView.setOnClickListener { _ ->
+//                val intent = Intent(context, ClayTemperatureActivity::class.java)
+//                intent.putExtra(ClayTemperatureActivity.CLAY_NAME, expandedListTextView.text)
+//                startActivity(context, intent, Bundle())
+
+                val intent2 = MainActivity.newIntent(context, expandedListTextView.text as String)
+                startActivity(context, intent2, Bundle())
+            }
         }
-        val expandedListTextView = convertView!!.findViewById<TextView>(R.id.list_item_title)
-        expandedListTextView.text = expandedListText
-
-
-        
-        
         return convertView
     }
 

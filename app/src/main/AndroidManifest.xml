@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClaysGlaze">
         <activity android:name=".CrackleListViewActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ClayTemperatureActivity">
+        <activity android:name=".ClayTemperatureActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
