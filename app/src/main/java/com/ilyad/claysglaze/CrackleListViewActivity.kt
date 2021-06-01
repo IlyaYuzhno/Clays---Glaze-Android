@@ -11,32 +11,39 @@ class CrackleListViewActivity : AppCompatActivity() {
 
     private lateinit var listView: ListView
     private val crackleList = arrayOf("Много", "Мало", "Нет")
+    var clay = ""
+    var temperature = ""
 
     companion object {
         const val CLAY_NAME = "clay_name"
         const val TEMPERATURE = ""
-
-//        fun newIntent(context: Context, selectedTemperature: String, clayName: String): Intent {
-//            val intent = Intent(context, CrackleListViewActivity::class.java)
-//
-//            intent.putExtra(CLAY_NAME, clayName)
-//            intent.putExtra(TEMPERATURE, selectedTemperature)
-//
-//            return intent
-//        }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crackle_list_view)
-        title = "Количество цека:"
+        listView = findViewById<ListView>(R.id.CrackleListView)
+        clay = intent.getStringExtra(CrackleListViewActivity.CLAY_NAME).toString()
+        temperature = intent.getStringExtra(CrackleListViewActivity.TEMPERATURE).toString()
+        title = "Количество цека на " + temperature
         setListView()
+        goToGlazesForClayActivity()
     }
 
     private fun setListView() {
-        listView = findViewById<ListView>(R.id.CrackleListView)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, crackleList)
         listView.adapter = adapter
+    }
+
+    private fun goToGlazesForClayActivity() {
+        val context = this
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val selectedCrackle = crackleList[position]
+            val intent = Intent(context, GlazesForClayActivity::class.java)
+            intent.putExtra(GlazesForClayActivity.CLAY_NAME, clay)
+            intent.putExtra(GlazesForClayActivity.TEMPERATURE, temperature)
+            intent.putExtra(GlazesForClayActivity.CRACKLE, selectedCrackle)
+            startActivity(intent)
+        }
     }
 }

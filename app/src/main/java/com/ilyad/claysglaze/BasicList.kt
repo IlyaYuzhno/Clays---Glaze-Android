@@ -64,9 +64,40 @@ class BasicList(val title: String) {
             return temperatureList
         }
 
+        // Get glazes list for specific clay, temperature and crackle
+        fun getGlazesForClay(clay: String,
+                             temperature: String,
+                             crackle: String,
+                             context: Context): ArrayList<String>  {
+            val glazesList = ArrayList<String>()
+            try {
+                // Load data
+                val jsonString = loadJsonFromAsset("clays_info.json", context)
+                val json = JSONObject(jsonString)
+                val clays = json.getJSONArray("clays")
+
+                // Get clays objects from data
+                for (i in 0 until clays.length()) {
+                    val item = clays.getJSONObject(i)
+                    val itemClay = item.getString("clay")
+                    if (itemClay.equals(clay)){
+                        val temperatureList = item.getJSONObject("temperature")
+                        val temperatureItem = temperatureList.getJSONObject(temperature)
+                        val crackleItem = temperatureItem.getJSONArray(crackle)
+                        for (i in 0 until crackleItem.length()) {
+                            glazesList.add(crackleItem.getString(i))
+                        }
+                    }
+                }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+            return glazesList
+        }
+
+
         private fun loadJsonFromAsset(filename: String, context: Context): String {
             val json: String
-
             try {
                 val inputStream = context.assets.open("clays_info.json")
                 val size = inputStream.available()

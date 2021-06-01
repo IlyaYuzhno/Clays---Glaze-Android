@@ -16,15 +16,6 @@ class MainActivity : AppCompatActivity() {
     internal var adapter: ExpandableListAdapter? = null
     internal var titleList: List<String> ? = null
 
-    companion object {
-         fun newIntent(context: Context, clayName: String): Intent {
-            val intent = Intent(context, ClayTemperatureActivity::class.java)
-             intent.putExtra(ClayTemperatureActivity.CLAY_NAME, clayName)
-            return intent
-        }
-    }
-
-
     val data: HashMap<String, List<String>>
         get() {
             val listData = HashMap<String, List<String>>()
@@ -62,13 +53,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        expandableListView = findViewById(R.id.ClaysExpandableListView)
         title = "Выбери массу:"
         getInfo()
     }
 
     private fun getInfo() {
-        val context = this
-    expandableListView = findViewById(R.id.ClaysExpandableListView)
     if (expandableListView != null) {
         val listData = data
         titleList = ArrayList(listData.keys)
