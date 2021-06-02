@@ -41,12 +41,20 @@ class CustomExpandableListAdapter internal constructor(private val context: Cont
             convertView = layoutInflater.inflate(R.layout.list_item, null)
         }
             val expandedListTextView = convertView!!.findViewById<TextView>(R.id.list_item_title)
+            val infoButton = convertView.findViewById<ImageButton>(R.id.infoButton)
             expandedListTextView.text = expandedListText
 
             // Go to ClayTemperatureActivity
             expandedListTextView.setOnClickListener { _ ->
                 val intent = Intent(context, ClayTemperatureActivity::class.java)
                 intent.putExtra(ClayTemperatureActivity.CLAY_NAME, expandedListTextView.text)
+                startActivity(context, intent, Bundle())
+            }
+
+            // Open Information Activity
+            infoButton.setOnClickListener{ _ ->
+                val intent = Intent(context, InformationActivity::class.java)
+                intent.putExtra(InformationActivity.CLAY_NAME, expandedListTextView.text)
                 startActivity(context, intent, Bundle())
             }
 

@@ -26,9 +26,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="0"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="toastMe"
         android:contentDescription="@string/info"
         app:srcCompat="@android:drawable/ic_menu_info_details" />
 

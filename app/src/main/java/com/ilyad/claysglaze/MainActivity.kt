@@ -55,10 +55,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         expandableListView = findViewById(R.id.ClaysExpandableListView)
         title = "Выбери массу:"
-        getInfo()
+        showList()
     }
 
-    private fun getInfo() {
+    private fun showList() {
     if (expandableListView != null) {
         val listData = data
         titleList = ArrayList(listData.keys)
@@ -69,9 +69,6 @@ class MainActivity : AppCompatActivity() {
 
     }
   }
-
-
-
 }
 
 
