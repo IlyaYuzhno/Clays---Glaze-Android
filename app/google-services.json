@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "46215648299",
+    "project_id": "claysandglazeandroid",
+    "storage_bucket": "claysandglazeandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46215648299:android:601f40cb9d5eec8203c66e",
+        "android_client_info": {
+          "package_name": "com.ilyad.claysglaze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46215648299-icehe0s6j4tebha1rsan3a785v7582se.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCidhqhWuX84eAOn_S4JDoW9Q5PB_D2p9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46215648299-icehe0s6j4tebha1rsan3a785v7582se.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
