@@ -11,20 +11,24 @@ class CrackleListViewActivity : AppCompatActivity() {
 
     private lateinit var listView: ListView
     private val crackleList = arrayOf("Много", "Мало", "Нет")
-    var clay = ""
+    var item = ""
     var temperature = ""
+    var mode = ""
+    var intentToNextActivity = Intent()
 
     companion object {
-        const val CLAY_NAME = "clay_name"
-        const val TEMPERATURE = ""
+        const val ITEM_NAME = "item_name"
+        const val TEMPERATURE = "temperature"
+        const val MODE = "mode"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crackle_list_view)
         listView = findViewById<ListView>(R.id.CrackleListView)
-        clay = intent.getStringExtra(CrackleListViewActivity.CLAY_NAME).toString()
+        item = intent.getStringExtra(CrackleListViewActivity.ITEM_NAME).toString()
         temperature = intent.getStringExtra(CrackleListViewActivity.TEMPERATURE).toString()
+        mode = intent.getStringExtra(CrackleListViewActivity.MODE).toString()
         title = "Количество цека на " + temperature
         setListView()
         goToGlazesForClayActivity()
@@ -39,11 +43,21 @@ class CrackleListViewActivity : AppCompatActivity() {
         val context = this
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedCrackle = crackleList[position]
-            val intent = Intent(context, GlazesForClayActivity::class.java)
-            intent.putExtra(GlazesForClayActivity.CLAY_NAME, clay)
-            intent.putExtra(GlazesForClayActivity.TEMPERATURE, temperature)
-            intent.putExtra(GlazesForClayActivity.CRACKLE, selectedCrackle)
-            startActivity(intent)
+
+            if (mode.equals("clay")) {
+                intentToNextActivity = Intent(context, GlazesForClayActivity::class.java)
+                intentToNextActivity.putExtra(GlazesForClayActivity.CLAY_NAME, item)
+                intentToNextActivity.putExtra(GlazesForClayActivity.TEMPERATURE, temperature)
+                intentToNextActivity.putExtra(GlazesForClayActivity.CRACKLE, selectedCrackle)
+            }
+            if (mode.equals("glaze")){
+                intentToNextActivity = Intent(context, ClaysForGlazesActivity::class.java)
+                intentToNextActivity.putExtra(ClaysForGlazesActivity.GLAZE_NAME, item)
+                intentToNextActivity.putExtra(ClaysForGlazesActivity.TEMPERATURE, temperature)
+                intentToNextActivity.putExtra(ClaysForGlazesActivity.CRACKLE, selectedCrackle)
+            }
+
+            startActivity(intentToNextActivity)
         }
     }
 }

@@ -10,13 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
 
     internal var expandableListView: ExpandableListView? = null
     internal var adapter: ExpandableListAdapter? = null
     internal var titleList: List<String> ? = null
 
-    val data: HashMap<String, List<String>>
+    open val data: HashMap<String, List<String>>
         get() {
             val listData = HashMap<String, List<String>>()
 
@@ -55,14 +55,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         expandableListView = findViewById(R.id.ClaysExpandableListView)
         title = "Выбери массу:"
-        showClaysList()
+        showList("clay")
     }
 
-    private fun showClaysList() {
+    open fun showList(mode: String) {
     if (expandableListView != null) {
         val listData = data
         titleList = ArrayList(listData.keys)
-        adapter = CustomExpandableListAdapter(this,
+        adapter = CustomExpandableListAdapter(mode,this,
             titleList as ArrayList<String>,
             listData)
         expandableListView!!.setAdapter(adapter)

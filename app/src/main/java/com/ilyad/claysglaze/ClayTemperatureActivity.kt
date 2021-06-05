@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 
-class ClayTemperatureActivity : AppCompatActivity() {
+open class ClayTemperatureActivity : AppCompatActivity() {
 
     private lateinit var listView: ListView
     private var temperatureList = arrayListOf<String>()
@@ -16,7 +16,6 @@ class ClayTemperatureActivity : AppCompatActivity() {
 
     companion object {
         const val CLAY_NAME = "clay_name"
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,29 +24,31 @@ class ClayTemperatureActivity : AppCompatActivity() {
         listView = findViewById<ListView>(R.id.ClaysTemperaturesListView)
         clay = intent.getStringExtra(ClayTemperatureActivity.CLAY_NAME).toString()
         title = "Обжиг массы " + clay + " на:"
-        getTemperatures()
+        getTemperatures(clay)
         goToCrackleActivity()
     }
 
-    private fun getTemperatures() {
+    open fun getTemperatures(item: String) {
         listView.isEnabled = true
-        temperatureList = BasicList.getTemperature(clay, this)
-        if (temperatureList[0].equals("No info available...")) {
-            listView.isEnabled = false
-        }
+        temperatureList = BasicList.getClayTemperature(
+            item,
+            this)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, temperatureList)
         listView.adapter = adapter
+        if (temperatureList[0] == "No info available...") {
+            listView.isEnabled = false
+        }
     }
 
-    private fun goToCrackleActivity() {
+    open fun goToCrackleActivity() {
         val context = this
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedTemperature = temperatureList[position]
             val intent = Intent(context, CrackleListViewActivity::class.java)
-            intent.putExtra(CrackleListViewActivity.CLAY_NAME, clay)
+            intent.putExtra(CrackleListViewActivity.ITEM_NAME, clay)
             intent.putExtra(CrackleListViewActivity.TEMPERATURE, selectedTemperature)
+            intent.putExtra(CrackleListViewActivity.MODE, "clay")
             startActivity(intent)
-
         }
     }
 

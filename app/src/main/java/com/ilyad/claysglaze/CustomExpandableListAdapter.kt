@@ -12,7 +12,8 @@ import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.res.ResourcesCompat
 
-class CustomExpandableListAdapter internal constructor(private val context: Context,
+class CustomExpandableListAdapter internal constructor(private val mode: String,
+                                                        private val context: Context,
                                                        private val titleList: List<String>,
                                                        private val dataList: HashMap<String, List<String>>)
                                                       : BaseExpandableListAdapter() {
@@ -46,9 +47,16 @@ class CustomExpandableListAdapter internal constructor(private val context: Cont
 
             // Go to ClayTemperatureActivity
             expandedListTextView.setOnClickListener { _ ->
-                val intent = Intent(context, ClayTemperatureActivity::class.java)
-                intent.putExtra(ClayTemperatureActivity.CLAY_NAME, expandedListTextView.text)
-                startActivity(context, intent, Bundle())
+                if (mode.equals("clay")) {
+                    val intent = Intent(context, ClayTemperatureActivity::class.java)
+                    intent.putExtra(ClayTemperatureActivity.CLAY_NAME, expandedListTextView.text)
+                    startActivity(context, intent, Bundle())
+                }
+                if (mode.equals("glaze")) {
+                    val intent = Intent(context, GlazeTemperatureActivity::class.java)
+                    intent.putExtra(GlazeTemperatureActivity.GLAZE_NAME, expandedListTextView.text)
+                    startActivity(context, intent, Bundle())
+                }
             }
 
             // Open Information Activity
