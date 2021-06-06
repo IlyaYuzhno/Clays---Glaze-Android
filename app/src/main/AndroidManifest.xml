@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClaysGlaze">
-        <activity android:name=".ClaysForGlazesActivity"></activity>
+        <activity android:name=".ClaysForGlazesActivity" />
         <activity android:name=".GlazeTemperatureActivity" />
         <activity android:name=".MainGlazesActivity" />
         <activity android:name=".MainActivity" />
