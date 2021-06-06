@@ -29,7 +29,7 @@ class ClaysForGlazesActivity : AppCompatActivity() {
     }
 
     private fun setListView() {
-        glazesList = BasicList.getClaysForGlaze(
+        glazesList = Interactor.getClaysForGlaze(
             glaze,
             temperature,
             crackle,

@@ -1,13 +1,10 @@
 package com.ilyad.claysglaze
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 
 class BasicAdapter(private val context: Context,
@@ -36,7 +33,7 @@ class BasicAdapter(private val context: Context,
 
         // Get title element
         val titleTextView = rowView.findViewById(R.id.title) as TextView
-        val item = getItem(position) as BasicList
+        val item = getItem(position) as Interactor
         titleTextView.text = item.title
         return rowView
     }

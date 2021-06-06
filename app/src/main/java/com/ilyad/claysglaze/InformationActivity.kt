@@ -3,10 +3,12 @@ package com.ilyad.claysglaze
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 
 
 class InformationActivity : AppCompatActivity() {
@@ -16,11 +18,13 @@ class InformationActivity : AppCompatActivity() {
     private lateinit var infoImage: ImageView
     private var storage: FirebaseStorageActivity = FirebaseStorageActivity()
     private var extractedName = ""
-    var clay = ""
+    var item = ""
     var info = ""
+    var mode = ""
 
     companion object {
-        const val CLAY_NAME = "clay_name"
+        const val ITEM_NAME = "item_name"
+        const val MODE = "mode"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,29 +38,37 @@ class InformationActivity : AppCompatActivity() {
         openFullSizeImage()
     }
 
+    private fun findViews() {
+
+
+    }
+
     private fun setViews() {
-        clay = intent.getStringExtra(InformationActivity.CLAY_NAME).toString()
-        info = BasicList.getInformation(clay, this)
-        titleTextView.text = clay
+        item = intent.getStringExtra(InformationActivity.ITEM_NAME).toString()
+        mode = intent.getStringExtra(InformationActivity.MODE).toString()
+        info = Interactor.getInformation(mode, item, this)
+        titleTextView.text = item
         infoTextView.text = info
-        setImage(clay)
+        setImage(item)
    }
 
     private fun setImage(clay: String) {
 
         // Extract clay name for storage query
-        extractedName = clay.substringBefore(",", clay)
+        when (mode) {
+            "clay" -> {extractedName = item.substringBefore(",", item)}
+            "glaze" -> {extractedName = item.substringBefore(" ", item)}
+        }
 
         // Storage query
-        storage.getFirebaseImage("clay", extractedName, infoImage, this)
+        storage.getFirebaseImage(mode, extractedName, infoImage, this)
     }
-
 
     private fun openFullSizeImage() {
         infoImage.setOnClickListener { _ ->
             val intent = Intent(this, FullScreenImage::class.java)
             intent.putExtra(FullScreenImage.IMAGE_NAME, extractedName)
-            //ContextCompat.startActivity(this, intent, Bundle())
+            intent.putExtra(FullScreenImage.MODE, mode)
             startActivity(intent)
         }
     }

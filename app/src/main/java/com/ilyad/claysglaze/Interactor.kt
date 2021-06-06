@@ -4,9 +4,11 @@ import android.content.Context
 import org.json.JSONException
 import org.json.JSONObject
 
-class BasicList(val title: String) {
+class Interactor(val title: String) {
 
     companion object {
+
+        // CLAYS PART
 
         // Get clays list by manufacturer
         fun getClaysFromFile(filename: String, brand: String, context: Context): ArrayList<String> {
@@ -22,7 +24,7 @@ class BasicList(val title: String) {
                     val item = clays.getJSONObject(i)
                     val itemBrand = item.getString("brand")
                     if (itemBrand.equals(brand)){
-                        claysList.add(BasicList(item.getString("clay")).title)
+                        claysList.add(Interactor(item.getString("clay")).title)
                     }
                 }
             } catch (e: JSONException) {
@@ -64,22 +66,34 @@ class BasicList(val title: String) {
             return temperatureList
         }
 
-        // Get information for specific clay
-        fun getInformation(clay: String,
+        // Get information for specific item (clay or glaze)
+        fun getInformation(mode: String, item: String,
                            context: Context): String  {
             var info = ""
+            var filename = ""
+            var objects = ""
+             when (mode) {
+                 "clay" -> {
+                     filename = "clays_info.json"
+                     objects = "clays"
+                 }
+                 "glaze" -> {
+                     filename = "glazes_info.json"
+                     objects = "glazes"
+                 }
+             }
             try {
                 // Load data
-                val jsonString = loadJsonFromAsset("clays_info.json", context)
+                val jsonString = loadJsonFromAsset(filename, context)
                 val json = JSONObject(jsonString)
-                val clays = json.getJSONArray("clays")
+                val itemsList = json.getJSONArray(objects)
 
                 // Get clays objects from data
-                for (i in 0 until clays.length()) {
-                    val item = clays.getJSONObject(i)
-                    val itemClay = item.getString("clay")
-                    if (itemClay.equals(clay)){
-                        info = item.getString("info")
+                for (i in 0 until itemsList.length()) {
+                    val itemObject = itemsList.getJSONObject(i)
+                    val itemObjectTitle = itemObject.getString(mode)
+                    if (itemObjectTitle.equals(item)){
+                        info = itemObject.getString("info")
                     }
                 }
             } catch (e: JSONException) {
@@ -119,6 +133,8 @@ class BasicList(val title: String) {
             return glazesList
         }
 
+        // GLAZES PART
+
         // Get glazes list by manufacturer
         fun getGlazesFromFile(brand: String, context: Context): ArrayList<String> {
             val glazesList = ArrayList<String>()
@@ -134,7 +150,7 @@ class BasicList(val title: String) {
                     val item = glazes.getJSONObject(i)
                     val itemBrand = item.getString("brand")
                     if (itemBrand.equals(brand)){
-                        glazesList.add(BasicList(item.getString("glaze")).title)
+                        glazesList.add(Interactor(item.getString("glaze")).title)
                     }
                 }
             } catch (e: JSONException) {
@@ -207,11 +223,7 @@ class BasicList(val title: String) {
             return claysList
         }
 
-
-
-
-
-
+        // Load JSON from assets folder
         private fun loadJsonFromAsset(filename: String, context: Context): String {
             val json: String
             try {

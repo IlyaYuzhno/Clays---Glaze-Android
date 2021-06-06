@@ -1,13 +1,8 @@
 package com.ilyad.claysglaze
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.*
-import android.widget.ExpandableListView.OnGroupClickListener
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 
 
 open class MainActivity : AppCompatActivity() {
@@ -20,31 +15,31 @@ open class MainActivity : AppCompatActivity() {
         get() {
             val listData = HashMap<String, List<String>>()
 
-            val witgert = BasicList.getClaysFromFile("clays_info.json", "Witgert", this)
+            val witgert = Interactor.getClaysFromFile("clays_info.json", "Witgert", this)
             listData["Witgert"] = witgert
 
-            val donbass = BasicList.getClaysFromFile("clays_info.json", "Donbass", this)
+            val donbass = Interactor.getClaysFromFile("clays_info.json", "Donbass", this)
             listData["Донбасс"] = donbass
 
-            val lagunaClay = BasicList.getClaysFromFile("clays_info.json", "LagunaClay", this)
+            val lagunaClay = Interactor.getClaysFromFile("clays_info.json", "LagunaClay", this)
             listData["Laguna Clay"] = lagunaClay
 
-            val labCeramica = BasicList.getClaysFromFile("clays_info.json", "LabCeramica", this)
+            val labCeramica = Interactor.getClaysFromFile("clays_info.json", "LabCeramica", this)
             listData["Lab Ceramica"] = labCeramica
 
-            val valentineClays = BasicList.getClaysFromFile("clays_info.json", "ValentineClays", this)
+            val valentineClays = Interactor.getClaysFromFile("clays_info.json", "ValentineClays", this)
             listData["Valentine Clays"] = valentineClays
 
-            val konakovsky = BasicList.getClaysFromFile("clays_info.json", "Konakovsky", this)
+            val konakovsky = Interactor.getClaysFromFile("clays_info.json", "Konakovsky", this)
             listData["Конаковский шамот"] = konakovsky
 
-            val spain = BasicList.getClaysFromFile("clays_info.json", "SiO2, Spain", this)
+            val spain = Interactor.getClaysFromFile("clays_info.json", "SiO2, Spain", this)
             listData["SiO2, Spain"] = spain
 
-            val goerg = BasicList.getClaysFromFile("clays_info.json", "GOERG & SCHNEIDER", this)
+            val goerg = Interactor.getClaysFromFile("clays_info.json", "GOERG & SCHNEIDER", this)
             listData["GOERG & SCHNEIDER"] = goerg
 
-            val raoul = BasicList.getClaysFromFile("clays_info.json", "Raoult & Beck", this)
+            val raoul = Interactor.getClaysFromFile("clays_info.json", "Raoult & Beck", this)
             listData["Raoult & Beck"] = raoul
 
             return listData

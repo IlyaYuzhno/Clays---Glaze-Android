@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -21,18 +22,29 @@ class FirebaseStorageActivity : AppCompatActivity() {
         storage = Firebase.storage
     }
 
-    fun getFirebaseImage(get: String, item: String, imageView: ImageView, context: Context) {
+    fun getFirebaseImage(mode: String, item: String, imageView: ImageView, context: Context) {
+        // Get storage reference
         val storageRef = storage.reference
-        if (get.equals("clay")){
-            var imageRef = storageRef.child("images/clays/" + item +".png")
+
+        // Set circular progress bar
+        val circularProgressBar = CircularProgressDrawable(context)
+        circularProgressBar.strokeWidth = 5f
+        circularProgressBar.centerRadius = 30f
+        circularProgressBar.start()
+
+        // Show image according to mode (clay or glaze)
+        if (mode.equals("clay")){
+            val imageRef = storageRef.child("images/clays/$item.png")
             Glide.with(context)
                 .load(imageRef)
+                .placeholder(circularProgressBar)
                 .into(imageView)
         }
-        if (get.equals("glaze")){
-            var imageRef = storageRef.child("images/glazes/" + item +".png")
+        if (mode.equals("glaze")){
+            val imageRef = storageRef.child("images/glazes/$item.png")
             Glide.with(context)
                 .load(imageRef)
+                .placeholder(circularProgressBar)
                 .into(imageView)
         }
     }

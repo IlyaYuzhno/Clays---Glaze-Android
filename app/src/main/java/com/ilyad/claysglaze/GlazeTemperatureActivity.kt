@@ -28,7 +28,7 @@ class GlazeTemperatureActivity : AppCompatActivity() {
 
     private fun getGlazeTemperature(item: String) {
         listView.isEnabled = true
-        temperatureList = BasicList.getGlazeTemperature(
+        temperatureList = Interactor.getGlazeTemperature(
             item,
             this)
         if (temperatureList[0] == "No info available...") {

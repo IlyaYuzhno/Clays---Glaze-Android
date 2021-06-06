@@ -62,7 +62,11 @@ class CustomExpandableListAdapter internal constructor(private val mode: String,
             // Open Information Activity
             infoButton.setOnClickListener{ _ ->
                 val intent = Intent(context, InformationActivity::class.java)
-                intent.putExtra(InformationActivity.CLAY_NAME, expandedListTextView.text)
+                when (mode) {
+                    "clay" -> {intent.putExtra(InformationActivity.MODE, mode)}
+                    "glaze" -> {intent.putExtra(InformationActivity.MODE, mode)}
+                }
+                intent.putExtra(InformationActivity.ITEM_NAME, expandedListTextView.text)
                 startActivity(context, intent, Bundle())
             }
 

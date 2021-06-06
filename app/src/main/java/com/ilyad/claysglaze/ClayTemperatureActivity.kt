@@ -1,10 +1,8 @@
 package com.ilyad.claysglaze
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 
@@ -30,7 +28,7 @@ open class ClayTemperatureActivity : AppCompatActivity() {
 
     open fun getTemperatures(item: String) {
         listView.isEnabled = true
-        temperatureList = BasicList.getClayTemperature(
+        temperatureList = Interactor.getClayTemperature(
             item,
             this)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, temperatureList)

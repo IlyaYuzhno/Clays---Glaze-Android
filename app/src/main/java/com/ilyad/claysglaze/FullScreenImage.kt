@@ -11,6 +11,7 @@ class FullScreenImage : AppCompatActivity() {
 
     companion object {
         const val IMAGE_NAME = "image_name"
+        const val MODE = "mode"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,11 +19,11 @@ class FullScreenImage : AppCompatActivity() {
         setContentView(R.layout.activity_full_screen_image)
         fullScreenImage = findViewById(R.id.fullScreenImage)
 
-        // Get image name and show image from Firebase
-        val clay = intent.getStringExtra(FullScreenImage.IMAGE_NAME).toString()
-        storage.getFirebaseImage("clay", clay, fullScreenImage, this)
+        // Get image name and show image from Firebase according to mode (clay or glaze)
+        val imageName = intent.getStringExtra(FullScreenImage.IMAGE_NAME).toString()
+        val mode = intent.getStringExtra(FullScreenImage.MODE).toString()
+        storage.getFirebaseImage(mode, imageName, fullScreenImage, this)
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -33,6 +34,5 @@ class FullScreenImage : AppCompatActivity() {
         super.onStop()
         Runtime.getRuntime().gc()
     }
-
 
 }
