@@ -37,7 +37,6 @@ class GlazesForClayActivity: AppCompatActivity() {
              this)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, glazesList)
         listView.adapter = adapter
-         listView.isEnabled = false
     }
 
     private fun extractNames() {
