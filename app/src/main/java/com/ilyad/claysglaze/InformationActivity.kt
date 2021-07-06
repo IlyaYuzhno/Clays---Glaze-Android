@@ -38,11 +38,6 @@ class InformationActivity : AppCompatActivity() {
         openFullSizeImage()
     }
 
-    private fun findViews() {
-
-
-    }
-
     private fun setViews() {
         item = intent.getStringExtra(InformationActivity.ITEM_NAME).toString()
         mode = intent.getStringExtra(InformationActivity.MODE).toString()

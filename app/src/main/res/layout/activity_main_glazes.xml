@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainGlazesActivity">
+    tools:context=".MainGlazesActivity"
+    android:background="?android:background"
+    android:forceDarkAllowed="true">
 
     <ExpandableListView
         android:id="@+id/GlazesExpandableListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/background_color_1"
+        android:background="?android:background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

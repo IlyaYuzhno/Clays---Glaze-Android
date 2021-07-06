@@ -3,6 +3,7 @@ package com.ilyad.claysglaze
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 
 open class MainActivity : AppCompatActivity() {
